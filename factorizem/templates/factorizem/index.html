@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Factorizer | RLJ's Math'n'Django</title>
+  </head>
+  <body>
+  	<a href="/">RETURN HOME<a/>
+  	<p>&nbsp;</p>
+  	<p>Enter a positive integer to view its factors</p>
+  	<form method="POST" id="factorize-form">
+  	{% csrf_token %}
+  	<input type="number" name="num" value="{{ target }}" />
+  	<button type="submit">Factorize Me!</button>
+  	</form>
+  	{% if factors is not None %}
+  	   <h3>Factors for {{ target }}</h3>
+  	   {% if prime %}{{ target }} is a prime number.{% endif %}
+  	   <ul>
+  	      {% for factor in factors %}
+  	      <li>{{ factor }}</li>
+  	      {% endfor %}
+  	   </ul>
+  	{% elif errormsg is not None %}
+  	   <p><strong>Error:</strong> {{ errormsg }}</p>
+  	   <p><strong>Submitted value:</strong> {{ target }}</p>
+  	{% endif %}
+  </body>
+</html>
